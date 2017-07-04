@@ -1,34 +1,28 @@
-############################################################
-# Simple but Cute and Helpful (TM) Bash Settings
-#
-# cat feedback >> "kirtika.ruchandani@gmail.com"
-############################################################
-
-#!/usr/bin/env bash
-# ${HOME}/.bashrc: executed by bash(1) for non-login shells.
-# If not running interactively, don't do anything
+# Check for an interactive session
 [ -z "$PS1" ] && return
 
-# User Info
 
-export USERNAME="Kirtika Ruchandani"
-export NICKNAME="rkirti"
+PUBLIC_IP=`wget http://ipecho.net/plain -O - -q ; echo`
+# Welcome message 
+echo -ne "\e[39mWelcome, \e[96m${USER}. \e[39mYou are logging in from $PUBLIC_IP and it's "; date '+%B %-d %Y' 
+# echo -e "And now your moment of Zen:"; fortune
+# echo
+# echo I am collecting some hardware information for you.
+# sleep 5
+# Assuming lm-sensors is installed and configured
+# echo -e "Here it is:"; sensors
+# uptime
+# lsscsi 
+# free -g
 
-# Distribute bashrc into smaller, more specific files
+alias chrome="google-chrome --user-data=~/.config/chromium >/dev/null 2>&1 &"
+alias odinson="echo I am collecting some hardware information for you.;echo;sensors;uptime;lsscsi;free -g"
 
-source .shells/defaults
-source .shells/functions
-source .shells/exports
-source .shells/alias
-source .shells/prompt   # Fancy prompt with time and current working dir
-source .shells/git      # Conveniences - Display current branch etc
+alias cpro="cd /home/${USER}"
+alias cdat="cd /home/${USER}"
 
-# Welcome message
-echo -ne "Good Morning, $NICKNAME! It's "; date '+%A, %B %-d %Y'
-echo -e "And now your moment of Zen:"; fortune
-echo
-echo "Hardware Information:"
-sensors  # Needs: 'sudo apt-get install lm-sensors'
-uptime   # Needs: 'sudo apt-get install lsscsi'
-lsscsi
-free -m
+source $HOME/.shells/defaults
+source $HOME/.shells/functions
+source $HOME/.shells/exports
+source $HOME/.shells/alias
+source $HOME/.shells/prompt
